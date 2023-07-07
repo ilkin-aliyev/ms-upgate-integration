@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/ms_upgate_integration
+    username: postgres
+    password: mysecretpassword
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+  liquibase:
+    change-log: classpath:liquibase/changelog-master.yml
+
+client:
+  upgate:
+    url: https://sandbox.upgate.com
+    api-key: 1115b450-fa58-47d6-b94b-d25b9e948771
+
+callback-urls:
+  success: https://example.com/success
+  failure: https://example.com/failure

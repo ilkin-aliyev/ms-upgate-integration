@@ -1,0 +1,57 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create payments table
+      author: Ilkin Aliyev
+      changes:
+        - createTable:
+            tableName: payments
+            columns:
+              - column:
+                  name: id
+                  type: varchar(64)
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: amount
+                  type: numeric(16,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: currency_code
+                  type: varchar(4)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: country_code
+                  type: varchar(4)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: customer_id
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: transaction_status
+                  type: varchar(16)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: payment_method
+                  type: varchar(16)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false

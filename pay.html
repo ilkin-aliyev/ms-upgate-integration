@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Store</title>
+</head>
+<body>
+
+<h1>iPhone Purchase</h1>
+
+<table>
+    <tr>
+        <th>Product Name</th>
+    </tr>
+    <tr>
+        <td>iPhone 9.99$</td>
+    </tr>
+</table>
+
+<button onclick="pay()">Pay</button>
+
+<script>
+    function pay() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:8080/v1/payments/initialize", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let response = JSON.parse(xhr.responseText);
+
+                window.location.replace(response.data.session.redirect_url);
+
+            }
+        };
+
+        var data = JSON.stringify({
+            "payment_method": "CARD",
+            "merchant_payment_id": "P_001",
+            "merchant_customer_id": "g4k3k4",
+            "amount": "9.99",
+            "currency_code": "USD",
+            "email": "john_doe@upgate.com",
+            "language": "en-us",
+            "country_code": "US",
+            "forced_3d": false,
+            "products": [
+                {
+                    "merchant_product_id": "R_001",
+                    "product_type": "SALE",
+                    "product_price": "9.99",
+                    "product_name": "Test product name",
+                    "product_description": "Test product description",
+                    "product_id": "2JZGULPNK27K2"
+                }
+            ]
+        });
+
+        xhr.send(data);
+    }
+</script>
+
+</body>
+</html>
